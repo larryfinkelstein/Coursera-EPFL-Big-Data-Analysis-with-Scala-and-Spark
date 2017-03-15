@@ -1,0 +1,144 @@
+format version: 5
+output mode:
+1 items
+0 -> multiple
+output directories:
+1 items
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin
+compile options:
+9 items
+0 -> -javabootclasspath
+1 -> C:\Program Files\Java\jre1.8.0_121\lib\resources.jar;C:\Program Files\Java\jre1.8.0_121\lib\rt.jar;C:\Program Files\Java\jre1.8.0_121\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_121\lib\jce.jar;C:\Program Files\Java\jre1.8.0_121\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_121\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\access-bridge.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\cldrdata.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\dnsns.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\jaccess.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\jfxrt.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\localedata.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\nashorn.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\sunec.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\sunmscapi.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jre1.8.0_121\lib\ext\zipfs.jar
+2 -> -javaextdirs
+3 ->  
+4 -> -bootclasspath
+5 -> D:\Program Files\scala-SDK-4.4.1-vfinal-2.11-win32.win32.x86\eclipse\plugins\org.scala-lang.scala-library_2.11.8.v20160304-115712-1706a37eb8.jar
+6 -> -deprecation
+7 -> -encoding
+8 -> UTF-8
+javac options:
+0 items
+compiler version:
+1 items
+0 -> 2.11.8
+compile order:
+1 items
+0 -> Mixed
+name hashing:
+1 items
+0 -> false
+products:
+20 items
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\Posting$.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\Posting.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$2$$anonfun$apply$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$2.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$3.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$4.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$clusterResults$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$clusterResults$2.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$findClosest$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$kmeans$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$printResults$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$printResults$2.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$rawPostings$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$sampleVectors$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$sampleVectors$2.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$stackoverflow$StackOverflow$$reservoirSampling$1$1$$anonfun$apply$mcVI$sp$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$stackoverflow$StackOverflow$$reservoirSampling$1$1.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$.class
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow.class
+binary dependencies:
+3 items
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> C:\Program Files\Java\jre1.8.0_121\lib\rt.jar
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> C:\Users\184961\.ivy2\cache\org.apache.spark\spark-core_2.11\jars\spark-core_2.11-2.0.0.jar
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> D:\Program Files\scala-SDK-4.4.1-vfinal-2.11-win32.win32.x86\eclipse\plugins\org.scala-lang.scala-library_2.11.8.v20160304-115712-1706a37eb8.jar
+direct source dependencies:
+0 items
+direct external dependencies:
+0 items
+public inherited source dependencies:
+0 items
+public inherited external dependencies:
+0 items
+member reference internal dependencies:
+0 items
+member reference external dependencies:
+0 items
+inheritance internal dependencies:
+0 items
+inheritance external dependencies:
+0 items
+class names:
+20 items
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.Posting
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.Posting$
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$1
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$2
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$2$$anonfun$apply$1
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$3
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$4
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$clusterResults$1
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$clusterResults$2
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$findClosest$1
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$kmeans$1
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$printResults$1
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$printResults$2
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$rawPostings$1
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$sampleVectors$1
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$sampleVectors$2
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$stackoverflow$StackOverflow$$reservoirSampling$1$1
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> stackoverflow.StackOverflow$$anonfun$stackoverflow$StackOverflow$$reservoirSampling$1$1$$anonfun$apply$mcVI$sp$1
+used names:
+0 items
+product stamps:
+20 items
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\Posting$.class -> lastModified(1489609120365)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\Posting.class -> lastModified(1489609120401)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$1.class -> lastModified(1489609120454)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$2$$anonfun$apply$1.class -> lastModified(1489609120464)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$2.class -> lastModified(1489609120460)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$3.class -> lastModified(1489609120468)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$4.class -> lastModified(1489609120473)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$clusterResults$1.class -> lastModified(1489609120477)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$clusterResults$2.class -> lastModified(1489609120481)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$findClosest$1.class -> lastModified(1489609120486)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$kmeans$1.class -> lastModified(1489609120492)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$printResults$1.class -> lastModified(1489609120496)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$printResults$2.class -> lastModified(1489609120500)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$rawPostings$1.class -> lastModified(1489609120506)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$sampleVectors$1.class -> lastModified(1489609120508)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$sampleVectors$2.class -> lastModified(1489609120511)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$stackoverflow$StackOverflow$$reservoirSampling$1$1$$anonfun$apply$mcVI$sp$1.class -> lastModified(1489609120518)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$$anonfun$stackoverflow$StackOverflow$$reservoirSampling$1$1.class -> lastModified(1489609120515)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow$.class -> lastModified(1489609120449)
+D:\coursera\code\spark-epfl\week2\stackoverflow\bin\stackoverflow\StackOverflow.class -> lastModified(1489609120439)
+source stamps:
+1 items
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> hash(e3a84d204968a55fed21efb80dd894ded6477b8d)
+binary stamps:
+3 items
+C:\Program Files\Java\jre1.8.0_121\lib\rt.jar -> lastModified(1486072716771)
+C:\Users\184961\.ivy2\cache\org.apache.spark\spark-core_2.11\jars\spark-core_2.11-2.0.0.jar -> lastModified(1468969501000)
+D:\Program Files\scala-SDK-4.4.1-vfinal-2.11-win32.win32.x86\eclipse\plugins\org.scala-lang.scala-library_2.11.8.v20160304-115712-1706a37eb8.jar -> lastModified(1462385886000)
+class names:
+3 items
+C:\Program Files\Java\jre1.8.0_121\lib\rt.jar -> java.io.Serializable
+C:\Users\184961\.ivy2\cache\org.apache.spark\spark-core_2.11\jars\spark-core_2.11-2.0.0.jar -> org.apache.spark.rdd.RDD
+D:\Program Files\scala-SDK-4.4.1-vfinal-2.11-win32.win32.x86\eclipse\plugins\org.scala-lang.scala-library_2.11.8.v20160304-115712-1706a37eb8.jar -> scala.Product
+internal apis:
+1 items
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHAUjYYPAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAAAHNyABN4c2J0aS5hcGkuU291cmNlQVBJuV6n+SkjOKQCAAJbAAtkZWZpbml0aW9uc3QAF1tMeHNidGkvYXBpL0RlZmluaXRpb247WwAIcGFja2FnZXN0ABRbTHhzYnRpL2FwaS9QYWNrYWdlO3hwdXIAF1tMeHNidGkuYXBpLkRlZmluaXRpb247iMlc57TjXg4CAAB4cAAAAANzcgATeHNidGkuYXBpLkNsYXNzTGlrZYM0HKHfsJdsAgAETAAOZGVmaW5pdGlvblR5cGV0ABpMeHNidGkvYXBpL0RlZmluaXRpb25UeXBlO1sAEHNhdmVkQW5ub3RhdGlvbnN0ABNbTGphdmEvbGFuZy9TdHJpbmc7TAAIc2VsZlR5cGV0ABBMeHNidGkvYXBpL0xhenk7TAAJc3RydWN0dXJlcQB+ABV4cgAheHNidGkuYXBpLlBhcmFtZXRlcml6ZWREZWZpbml0aW9u+RFusdVQPOICAAFbAA50eXBlUGFyYW1ldGVyc3QAGltMeHNidGkvYXBpL1R5cGVQYXJhbWV0ZXI7eHIAFHhzYnRpLmFwaS5EZWZpbml0aW9uhyob6HFC40YCAARMAAZhY2Nlc3N0ABJMeHNidGkvYXBpL0FjY2VzcztbAAthbm5vdGF0aW9uc3QAF1tMeHNidGkvYXBpL0Fubm90YXRpb247TAAJbW9kaWZpZXJzdAAVTHhzYnRpL2FwaS9Nb2RpZmllcnM7TAAEbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO3hwc3IAEHhzYnRpLmFwaS5QdWJsaWO6WD2ubC1gQgIAAHhyABB4c2J0aS5hcGkuQWNjZXNz3WKa+B1jMUgCAAB4cHVyABdbTHhzYnRpLmFwaS5Bbm5vdGF0aW9uO+uX6xkQ9o1IAgAAeHAAAAAAc3IAE3hzYnRpLmFwaS5Nb2RpZmllcnPHERMhaZzcJAIAAUIABWZsYWdzeHAAdAAVc3RhY2tvdmVyZmxvdy5Qb3N0aW5ndXIAGltMeHNidGkuYXBpLlR5cGVQYXJhbWV0ZXI72W0mDyid8rYCAAB4cAAAAAB+cgAYeHNidGkuYXBpLkRlZmluaXRpb25UeXBlAAAAAAAAAAASAAB4cgAOamF2YS5sYW5nLkVudW0AAAAAAAAAABIAAHhwdAAIQ2xhc3NEZWZ1cgATW0xqYXZhLmxhbmcuU3RyaW5nO63SVufpHXtHAgAAeHAAAAAAc3IAE3hzYnRpLlNhZmVMYXp5JEltcGw7kU8R9EVMyQIAA1oACGJpdG1hcCQwTAACX3R0ABJMamF2YS9sYW5nL09iamVjdDtMAARldmFsdAARTHNjYWxhL0Z1bmN0aW9uMDt4cgAWeHNidGkuYXBpLkFic3RyYWN0TGF6edN3tQFfu+egAgAAeHAAcHNyACB4c2J0aS5TYWZlTGF6eSQkYW5vbmZ1biRzdHJpY3QkMQAAAAAAAAAAAgABTAAHdmFsdWUkMXEAfgAveHBzcgATeHNidGkuYXBpLkVtcHR5VHlwZbz9nkZJO4kkAgAAeHIAFHhzYnRpLmFwaS5TaW1wbGVUeXBlcnhiiCEjv0ACAAB4cgAOeHNidGkuYXBpLlR5cGU/atkhFkmqygIAAHhwc3EAfgAuAHBzcQB+ADNzcgATeHNidGkuYXBpLlN0cnVjdHVyZamq+YCTb9gAAgADTAAIZGVjbGFyZWRxAH4AFUwACWluaGVyaXRlZHEAfgAVTAAHcGFyZW50c3EAfgAVeHEAfgA3c3EAfgAuAHBzcQB+ADN1cQB+ABAAAAAAc3EAfgAuAHBzcQB+ADN1cQB+ABAAAAAAc3EAfgAuAHB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
+external apis:
+0 items
+source infos:
+1 items
+D:\coursera\code\spark-epfl\week2\stackoverflow\src\main\scala\stackoverflow\StackOverflow.scala -> 
+AAAAAAAAAAA=
+compilations:
+1 items
+0 -> rO0ABXNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABWtOfPBh1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5dAASTGphdmEvbGFuZy9TdHJpbmc7TAAPc291cmNlRGlyZWN0b3J5cQB+AAZ4cHQAM0Q6XGNvdXJzZXJhXGNvZGVcc3BhcmstZXBmbFx3ZWVrMlxzdGFja292ZXJmbG93XGJpbnQAPkQ6XGNvdXJzZXJhXGNvZGVcc3BhcmstZXBmbFx3ZWVrMlxzdGFja292ZXJmbG93XHNyY1xtYWluXHNjYWxh
