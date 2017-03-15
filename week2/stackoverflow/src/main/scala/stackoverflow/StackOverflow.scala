@@ -25,7 +25,7 @@ object StackOverflow extends StackOverflow {
     val grouped = groupedPostings(raw)
     val scored  = scoredPostings(grouped)
     val vectors = vectorPostings(scored)
-//    assert(vectors.count() == 2121822, "Incorrect number of vectors: " + vectors.count())
+    assert(vectors.count() == 2121822, "Incorrect number of vectors: " + vectors.count())
 
     val means   = kmeans(sampleVectors(vectors), vectors, debug = true)
     val results = clusterResults(means, vectors)
@@ -77,8 +77,10 @@ class StackOverflow extends Serializable {
 
 
   /** Group the questions and answers together */
-  def groupedPostings(postings: RDD[Posting]): RDD[(Int, Iterable[(Posting, Posting)])] = {
-    ???
+  def groupedPostings(postings: RDD[Posting]): RDD[(/*QID*/ Int, Iterable[(Posting, Posting)])] = {
+    val qRdd = postings.filter(_.postingType == 1).map(p => (p.id, p))
+    val ansRdd = postings.filter(p => p.postingType == 2 && p.parentId != None).map(p2 => (p2.id, p2))
+    qRdd.join(ansRdd).groupByKey
   }
 
 
@@ -96,8 +98,7 @@ class StackOverflow extends Serializable {
           }
       highScore
     }
-
-    ???
+    grouped.map(data => (data._2.last._1, answerHighScore(data._2.map(p => p._2).toArray)))
   }
 
 
@@ -117,7 +118,8 @@ class StackOverflow extends Serializable {
       }
     }
 
-    ???
+    scored.map(sc => (langSpread * firstLangInTag(sc._1.tags, langs).getOrElse(0), sc._2)).filter(_._1 != 0)
+
   }
 
 
