@@ -79,7 +79,7 @@ class StackOverflow extends Serializable {
   /** Group the questions and answers together */
   def groupedPostings(postings: RDD[Posting]): RDD[(/*QID*/ Int, Iterable[(Posting, Posting)])] = {
     val qRdd = postings.filter(_.postingType == 1).map(p => (p.id, p))
-    val ansRdd = postings.filter(p => p.postingType == 2 && p.parentId != None).map(p2 => (p2.id, p2))
+    val ansRdd = postings.filter(p => p.postingType == 2 && p.parentId != None).map(p2 => (p2.parentId.getOrElse(-1), p2))
     qRdd.join(ansRdd).groupByKey
   }
 
@@ -118,7 +118,7 @@ class StackOverflow extends Serializable {
       }
     }
 
-    scored.map(sc => (langSpread * firstLangInTag(sc._1.tags, langs).getOrElse(0), sc._2)).filter(_._1 != 0)
+    scored.map(sc => (langSpread * firstLangInTag(sc._1.tags, langs).getOrElse(-1), sc._2))
 
   }
 
@@ -272,13 +272,21 @@ class StackOverflow extends Serializable {
   //
   def clusterResults(means: Array[(Int, Int)], vectors: RDD[(Int, Int)]): Array[(String, Double, Int, Int)] = {
     val closest = vectors.map(p => (findClosest(p, means), p))
-    val closestGrouped = closest.groupByKey()
+    val closestGrouped = closest.groupByKey
 
     val median = closestGrouped.mapValues { vs =>
-      val langLabel: String   = ??? // most common language in the cluster
-      val langPercent: Double = ??? // percent of the questions in the most common language
-      val clusterSize: Int    = ???
-      val medianScore: Int    = ???
+      val m = vs.groupBy(_._1).maxBy(qa => qa._2.size)
+      val langLabel: String   = langs(m._1 / langSpread) // most common language in the cluster
+      val langPercent: Double =  m._2.size.toDouble * 100 / vs.size // percent of the questions in the most common language
+      val clusterSize: Int    = vs.size
+      val sorted = vs.map(_._2).toVector.sorted
+      val medianScore: Int    = {
+        if(sorted.size % 2 == 1){
+          sorted(sorted.size / 2)
+        }else{
+          (sorted(sorted.size / 2) + sorted(sorted.size / 2 + 1)) / 2
+        }
+      }
 
       (langLabel, langPercent, clusterSize, medianScore)
     }
