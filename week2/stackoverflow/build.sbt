@@ -4,7 +4,7 @@ scalaVersion := "2.11.8"
 
 scalacOptions ++= Seq("-deprecation")
 
-courseId := "GgMUTQlcEeeUowqmzGUjkg"
+courseId := "e8VseYIYEeWxQQoymFg8zQ"
 
 resolvers += Resolver.sonatypeRepo("releases")
 
@@ -39,13 +39,13 @@ assignmentsMap := {
       options = Map("Xmx"->"1540m", "grader-memory"->"2048", "totalTimeout" -> "900", "grader-cpu" -> "2")),
     "stackoverflow" -> Assignment(
       packageName = "stackoverflow",
-      key = "JH0diQlcEeer0A6dcha8Vg",
-      itemId = "Re42P",
-      partId = "dKQkB",
+      key = "7ByAoS4kEea1yxIfJA1CUw",
+      itemId = "FWGnz",
+      partId = "OY5fJ",
       maxScore = 10d,
       styleScoreRatio = 0.0,
       dependencies = depsSpark,
-      options = Map("Xmx"->"800m", "grader-memory"->"2048", "totalTimeout" -> "900", "grader-cpu" -> "2")),
+      options = Map("Xmx"->"1540m", "grader-memory"->"2048", "totalTimeout" -> "900", "grader-cpu" -> "2")),
     "timeusage" -> Assignment(
       packageName = "timeusage",
       key = "mVk0fgQ0EeeGZQrYVAT1jg",
