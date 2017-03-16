@@ -117,7 +117,7 @@ class StackOverflow extends Serializable {
     * 
     */
     
-    grouped.map(data => (data._2.last._1, answerHighScore(data._2.map(p => p._2).toArray)))
+    grouped.map(data => (data._2.head._1, answerHighScore(data._2.map(_._2).toArray)))
     
   }
 
@@ -137,15 +137,10 @@ class StackOverflow extends Serializable {
         }
       }
     }
-    scored.flatMap { score =>
-      firstLangInTag(score._1.tags, langs).map { langIndex =>
-        (langIndex * langSpread, score._2)
-      }
-    }.cache()
-    /*
-    scored.map(sc => (langSpread * firstLangInTag(sc._1.tags, langs).getOrElse(-1), sc._2)).cache
-    * 
-    */
+    scored.flatMap(sc =>
+      firstLangInTag(sc._1.tags, langs).map(lI => (lI * langSpread, sc._2))
+    ).cache()
+    
   }
 
 
