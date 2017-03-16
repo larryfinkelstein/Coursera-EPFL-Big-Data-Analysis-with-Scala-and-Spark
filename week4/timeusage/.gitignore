@@ -1,6 +1,8 @@
 /bin/
 /target/
 /.settings/
+/project/target
+/project/project
 .cache-main
 .cache-tests
 .classpath
