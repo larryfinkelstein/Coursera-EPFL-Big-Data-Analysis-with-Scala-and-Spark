@@ -16,6 +16,7 @@ object TimeUsage {
       .builder()
       .appName("Time Usage")
       .config("spark.master", "local")
+      //.config("spark.sql.warehouse.dir", "file:///E:/coursera/spark/week4/timeusage/spark-warehouse")
       .getOrCreate()
 
   // For implicit conversions like converting RDDs to DataFrames
@@ -37,19 +38,17 @@ object TimeUsage {
   /** @return The read DataFrame along with its column names. */
   def read(resource: String): (List[String], DataFrame) = {
     val rdd = spark.sparkContext.textFile(fsPath(resource))
+    //val rdd = spark.sparkContext.textFile("E:/coursera/spark/week4/timeusage/src/main/resources/timeusage/atussum.csv")
 
-    val headerColumns = rdd.first().split(",").to[List]
+    val headerColumns = rdd.first.split(",").to[List]
     // Compute the schema based on the first line of the CSV file
     val schema = dfSchema(headerColumns)
 
-    val data =
-      rdd
-        .mapPartitionsWithIndex((i, it) => if (i == 0) it.drop(1) else it) // skip the header line
-        .map(_.split(",").to[List])
-        .map(row)
+    val data = rdd.mapPartitionsWithIndex((i, it) => if (i == 0) it.drop(1) else it) // skip the header line
+                  .map(_.split(",").to[List])
+                  .map(row)
 
-    val dataFrame =
-      spark.createDataFrame(data, schema)
+    val dataFrame = spark.createDataFrame(data, schema)
 
     (headerColumns, dataFrame)
   }
@@ -62,15 +61,24 @@ object TimeUsage {
     *         have type Double. None of the fields are nullable.
     * @param columnNames Column names of the DataFrame
     */
-  def dfSchema(columnNames: List[String]): StructType =
-    ???
+  def dfSchema(columnNames: List[String]): StructType ={
+    val first = StructField(columnNames.head, StringType, nullable = false)
+    val rest = columnNames.tail.map(StructField(_, DoubleType, nullable = false))
+    StructType(first :: rest)
+    /*
+    val fields = columnNames.map(field => StructField(field, DoubleType, nullable = false))
+    StructType(fields)
+    * 
+    */
+  }
 
 
   /** @return An RDD Row compatible with the schema produced by `dfSchema`
     * @param line Raw fields
     */
-  def row(line: List[String]): Row =
-    ???
+  def row(line: List[String]): Row ={
+    Row.fromSeq(line.head :: line.tail.map(_.toDouble))
+  }
 
   /** @return The initial data frame columns partitioned in three groups: primary needs (sleeping, eating, etc.),
     *         work and other (leisure activities)
@@ -78,24 +86,63 @@ object TimeUsage {
     * @see https://www.kaggle.com/bls/american-time-use-survey
     *
     * The dataset contains the daily time (in minutes) people spent in various activities. For instance, the column
-    * “t010101” contains the time spent sleeping, the column “t110101” contains the time spent eating and drinking, etc.
+    * "t010101" contains the time spent sleeping, the column "t110101" contains the time spent eating and drinking, etc.
     *
     * This method groups related columns together:
-    * 1. “primary needs” activities (sleeping, eating, etc.). These are the columns starting with “t01”, “t03”, “t11”,
-    *    “t1801” and “t1803”.
-    * 2. working activities. These are the columns starting with “t05” and “t1805”.
-    * 3. other activities (leisure). These are the columns starting with “t02”, “t04”, “t06”, “t07”, “t08”, “t09”,
-    *    “t10”, “t12”, “t13”, “t14”, “t15”, “t16” and “t18” (those which are not part of the previous groups only).
+    * 1. "primary needs" activities (sleeping, eating, etc.). These are the columns starting with "t01", "t03", "t11",
+    *    "t1801" and "t1803".
+    * 2. working activities. These are the columns starting with "t05" and "t1805".
+    * 3. other activities (leisure). These are the columns starting with "t02", "t04", "t06", "t07", "t08", "t09",
+    *    "t10", "t12", "t13", "t14", "t15", "t16" and "t18" (those which are not part of the previous groups only).
     */
   def classifiedColumns(columnNames: List[String]): (List[Column], List[Column], List[Column]) = {
-    ???
+    val primaryPre: List[String] = List("t01", "t03", "t11", "t1801", "t1803")
+    val workingPre = List("t05", "t1805")
+    val otherPre = List("t02", "t04", "t06", "t07", "t08", "t09", "t10", "t12", "t13", "t14", "t15", "t16", "t18")
+    columnNames.foldRight[(List[Column], List[Column], List[Column])]((Nil, Nil, Nil)) {
+      (columnName, acc) =>
+        if (primaryPre.exists(columnName.startsWith))
+          acc.copy(_1 = new Column(columnName) :: acc._1)
+        else if (workingPre.exists(columnName.startsWith))
+          acc.copy(_2 = new Column(columnName) :: acc._2)
+        else if (otherPre.exists(columnName.startsWith))
+          acc.copy(_3 = new Column(columnName) :: acc._3)
+        else
+          acc
+    }
+    /*
+    val primaryCols = columnNames.filter(field => {
+      for(str <- primaryPre){
+        if(field.startsWith(str)) true
+      }
+      false
+    }).map(field => new Column(field))
+    
+    val workingCols = columnNames.filter(field => {
+      for(str <- workingPre){
+        if(field.startsWith(str)) true
+      }
+      false
+    }).map(field => new Column(field))
+    
+    val otherCols = columnNames.filter(field => {
+      for(str <- otherPre){
+        if(field.startsWith(str)) true
+      }
+      false
+    }).map(field => new Column(field))
+    (primaryCols, workingCols, otherCols)
+    * 
+    */
+    
+    
   }
 
   /** @return a projection of the initial DataFrame such that all columns containing hours spent on primary needs
-    *         are summed together in a single column (and same for work and leisure). The “teage” column is also
+    *         are summed together in a single column (and same for work and leisure). The "teage" column is also
     *         projected to three values: "young", "active", "elder".
     *
-    * @param primaryNeedsColumns List of columns containing time spent on “primary needs”
+    * @param primaryNeedsColumns List of columns containing time spent on "primary needs"
     * @param workColumns List of columns containing time spent working
     * @param otherColumns List of columns containing time spent doing other activities
     * @param df DataFrame whose schema matches the given column lists
@@ -104,12 +151,12 @@ object TimeUsage {
     * a single column.
     *
     * The resulting DataFrame should have the following columns:
-    * - working: value computed from the “telfs” column of the given DataFrame:
+    * - working: value computed from the "telfs" column of the given DataFrame:
     *   - "working" if 1 <= telfs < 3
     *   - "not working" otherwise
-    * - sex: value computed from the “tesex” column of the given DataFrame:
+    * - sex: value computed from the "tesex" column of the given DataFrame:
     *   - "male" if tesex = 1, "female" otherwise
-    * - age: value computed from the “teage” column of the given DataFrame:
+    * - age: value computed from the "teage" column of the given DataFrame:
     *   - "young" if 15 <= teage <= 22,
     *   - "active" if 23 <= teage <= 55,
     *   - "elder" otherwise
@@ -127,15 +174,22 @@ object TimeUsage {
     otherColumns: List[Column],
     df: DataFrame
   ): DataFrame = {
-    val workingStatusProjection: Column = ???
-    val sexProjection: Column = ???
-    val ageProjection: Column = ???
+    val workingStatusProjection: Column = when($"telfs" >= 1 && $"telfs" < 3, "working")
+                                         .otherwise("not working")
+                                         .as("working")
+    val sexProjection: Column = when($"tesex" === 1, "male")
+                               .otherwise("female")
+                               .as("sex")
+    val ageProjection: Column = when($"teage" >= 15 && $"teage" <= 22, "young")
+                               .when($"teage" >= 23 && $"teage" <= 55, "active")
+                               .otherwise("elder")
+                               .as("age")
 
-    val primaryNeedsProjection: Column = ???
-    val workProjection: Column = ???
-    val otherProjection: Column = ???
-    df
-      .select(workingStatusProjection, sexProjection, ageProjection, primaryNeedsProjection, workProjection, otherProjection)
+    val primaryNeedsProjection: Column = primaryNeedsColumns.reduce(_ + _).divide(60).as("primaryNeeds")
+    val workProjection: Column = workColumns.reduce(_ + _).divide(60).as("work")
+    val otherProjection: Column = otherColumns.reduce(_ + _).divide(60).as("other")
+    
+    df.select(workingStatusProjection, sexProjection, ageProjection, primaryNeedsProjection, workProjection, otherProjection)
       .where($"telfs" <= 4) // Discard people who are not in labor force
   }
 
@@ -144,20 +198,22 @@ object TimeUsage {
     * @param summed DataFrame returned by `timeUsageSumByClass`
     *
     * The resulting DataFrame should have the following columns:
-    * - working: the “working” column of the `summed` DataFrame,
-    * - sex: the “sex” column of the `summed` DataFrame,
-    * - age: the “age” column of the `summed` DataFrame,
-    * - primaryNeeds: the average value of the “primaryNeeds” columns of all the people that have the same working
+    * - working: the "working" column of the `summed` DataFrame,
+    * - sex: the "sex" column of the `summed` DataFrame,
+    * - age: the "age" column of the `summed` DataFrame,
+    * - primaryNeeds: the average value of the "primaryNeeds" columns of all the people that have the same working
     *   status, sex and age, rounded with a scale of 1 (using the `round` function),
-    * - work: the average value of the “work” columns of all the people that have the same working status, sex
+    * - work: the average value of the "work" columns of all the people that have the same working status, sex
     *   and age, rounded with a scale of 1 (using the `round` function),
-    * - other: the average value of the “other” columns all the people that have the same working status, sex and
+    * - other: the average value of the "other" columns all the people that have the same working status, sex and
     *   age, rounded with a scale of 1 (using the `round` function).
     *
     * Finally, the resulting DataFrame should be sorted by working status, sex and age.
     */
   def timeUsageGrouped(summed: DataFrame): DataFrame = {
-    ???
+    summed.groupBy("age", "sex", "working")
+          .agg(round(avg("primaryNeeds"), 1), round(avg("work"), 1), round(avg("other"), 1))
+          .orderBy("working", "sex", "age")
   }
 
   /**
@@ -174,10 +230,17 @@ object TimeUsage {
     * @param viewName Name of the SQL view to use
     */
   def timeUsageGroupedSqlQuery(viewName: String): String =
-    ???
+    s"""
+    select working, sex, age,
+    round(sum(primaryNeeds) / count(primaryNeeds), 1),
+    round(sum(work) / count(work), 1),
+    round(sum(other) / count(other), 1)
+    from $viewName
+    group by working, sex, age
+    order by working, sex, age """
 
   /**
-    * @return A `Dataset[TimeUsageRow]` from the “untyped” `DataFrame`
+    * @return A `Dataset[TimeUsageRow]` from the "untyped" `DataFrame`
     * @param timeUsageSummaryDf `DataFrame` returned by the `timeUsageSummary` method
     *
     * Hint: you should use the `getAs` method of `Row` to look up columns and
