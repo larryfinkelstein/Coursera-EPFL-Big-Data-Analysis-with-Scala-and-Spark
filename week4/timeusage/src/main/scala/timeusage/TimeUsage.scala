@@ -226,9 +226,9 @@ object TimeUsage {
   def timeUsageGroupedSqlQuery(viewName: String): String =
     s"""
     select working, sex, age,
-    round(sum(primaryNeeds) / count(primaryNeeds), 1),
-    round(sum(work) / count(work), 1),
-    round(sum(other) / count(other), 1)
+    round(avg(primaryNeeds), 1),
+    round(avg(work), 1),
+    round(avg(other), 1)
     from $viewName
     group by working, sex, age
     order by working, sex, age """
