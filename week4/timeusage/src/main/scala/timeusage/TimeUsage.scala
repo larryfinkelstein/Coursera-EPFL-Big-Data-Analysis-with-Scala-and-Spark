@@ -16,7 +16,7 @@ object TimeUsage {
       .builder()
       .appName("Time Usage")
       .config("spark.master", "local")
-      //.config("spark.sql.warehouse.dir", "file:///E:/coursera/spark/week4/timeusage/spark-warehouse")
+      .config("spark.sql.warehouse.dir", "file:///E:/coursera/spark/week4/timeusage/spark-warehouse")
       .getOrCreate()
 
   // For implicit conversions like converting RDDs to DataFrames
@@ -33,12 +33,16 @@ object TimeUsage {
     val summaryDf = timeUsageSummary(primaryNeedsColumns, workColumns, otherColumns, initDf)
     val finalDf = timeUsageGrouped(summaryDf)
     finalDf.show()
+    
+    //val ds = timeUsageSummaryTyped(summaryDf)
+    //val ds2 = timeUsageGroupedTyped(ds)
+    //ds2.show
   }
 
   /** @return The read DataFrame along with its column names. */
   def read(resource: String): (List[String], DataFrame) = {
-    val rdd = spark.sparkContext.textFile(fsPath(resource))
-    //val rdd = spark.sparkContext.textFile("E:/coursera/spark/week4/timeusage/src/main/resources/timeusage/atussum.csv")
+    //val rdd = spark.sparkContext.textFile(fsPath(resource))
+    val rdd = spark.sparkContext.textFile("E:/coursera/spark/week4/timeusage/src/main/resources/timeusage/atussum.csv")
 
     val headerColumns = rdd.first.split(",").to[List]
     // Compute the schema based on the first line of the CSV file
@@ -179,6 +183,8 @@ object TimeUsage {
     
     df.select(workingStatusProjection, sexProjection, ageProjection, primaryNeedsProjection, workProjection, otherProjection)
       .where($"telfs" <= 4) // Discard people who are not in labor force
+    
+    
   }
 
   /** @return the average daily time (in hours) spent in primary needs, working or leisure, grouped by the different
@@ -199,7 +205,7 @@ object TimeUsage {
     * Finally, the resulting DataFrame should be sorted by working status, sex and age.
     */
   def timeUsageGrouped(summed: DataFrame): DataFrame = {
-    summed.groupBy("age", "sex", "working")
+    summed.groupBy("working", "sex", "age")
           .agg(round(avg("primaryNeeds"), 1), round(avg("work"), 1), round(avg("other"), 1))
           .orderBy("working", "sex", "age")
   }
@@ -260,7 +266,7 @@ object TimeUsage {
           .agg(typed.avg[TimeUsageRow](_.primaryNeeds), typed.avg[TimeUsageRow](_.work), typed.avg[TimeUsageRow](_.other))
           .map(d => (d._1.split(",").toList, d._2, d._3, d._4))
           .map(d => TimeUsageRow(d._1(0), d._1(1), d._1(2), Math.round(d._2 * 10) / 10d, Math.round(d._3 * 10) / 10d, Math.round(d._4 * 10) / 10d))
-          .orderBy("working", "age", "sex")
+          .orderBy("working", "sex", "age")
   }
 }
 
