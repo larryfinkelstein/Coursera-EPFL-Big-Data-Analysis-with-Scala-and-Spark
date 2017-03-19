@@ -109,35 +109,23 @@ object TimeUsage {
           acc.copy(_3 = new Column(columnName) :: acc._3)
         else
           acc
-    }
+    }    
     /*
-    val primaryCols = columnNames.filter(field => {
-      for(str <- primaryPre){
-        if(field.startsWith(str)) true
-      }
-      false
-    }).map(field => new Column(field))
-    
-    val workingCols = columnNames.filter(field => {
-      for(str <- workingPre){
-        if(field.startsWith(str)) true
-      }
-      false
-    }).map(field => new Column(field))
-    
-    val otherCols = columnNames.filter(field => {
-      for(str <- otherPre){
-        if(field.startsWith(str)) true
-      }
-      false
-    }).map(field => new Column(field))
+    val primaryCols = columnNames.filter(field => isPre(field, primaryPre)).map(field => new Column(field))
+    val workingCols = columnNames.filter(field => isPre(field, workingPre)).map(field => new Column(field))
+    val otherCols = columnNames.filter(field => isPre(field, otherPre)).map(field => new Column(field))
+
     (primaryCols, workingCols, otherCols)
     * 
     */
-    
-    
   }
 
+  def isPre(head: String, pres: List[String]): Boolean = {
+    for(str <- pres){
+      if(head.startsWith(str)) return true
+    }
+    false
+  }
   /** @return a projection of the initial DataFrame such that all columns containing hours spent on primary needs
     *         are summed together in a single column (and same for work and leisure). The "teage" column is also
     *         projected to three values: "young", "active", "elder".
@@ -246,8 +234,14 @@ object TimeUsage {
     * Hint: you should use the `getAs` method of `Row` to look up columns and
     * cast them at the same time.
     */
-  def timeUsageSummaryTyped(timeUsageSummaryDf: DataFrame): Dataset[TimeUsageRow] =
-    ???
+  def timeUsageSummaryTyped(timeUsageSummaryDf: DataFrame): Dataset[TimeUsageRow] ={
+    timeUsageSummaryDf.map(row => TimeUsageRow(row.getAs("working"),
+                                               row.getAs("sex"),
+                                               row.getAs("age"),
+                                               row.getAs("primaryNeeds"),
+                                               row.getAs("work"),
+                                               row.getAs("other"))) 
+  }
 
   /**
     * @return Same as `timeUsageGrouped`, but using the typed API when possible
@@ -262,7 +256,11 @@ object TimeUsage {
     */
   def timeUsageGroupedTyped(summed: Dataset[TimeUsageRow]): Dataset[TimeUsageRow] = {
     import org.apache.spark.sql.expressions.scalalang.typed
-    ???
+    summed.groupByKey(tur => tur.working + "," + tur.sex + "," + tur.age)
+          .agg(typed.avg[TimeUsageRow](_.primaryNeeds), typed.avg[TimeUsageRow](_.work), typed.avg[TimeUsageRow](_.other))
+          .map(d => (d._1.split(",").toList, d._2, d._3, d._4))
+          .map(d => TimeUsageRow(d._1(0), d._1(1), d._1(2), Math.round(d._2 * 10) / 10d, Math.round(d._3 * 10) / 10d, Math.round(d._4 * 10) / 10d))
+          .orderBy("working", "age", "sex")
   }
 }
 
