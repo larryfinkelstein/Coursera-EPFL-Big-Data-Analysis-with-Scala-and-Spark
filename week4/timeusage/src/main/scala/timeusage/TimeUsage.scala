@@ -69,11 +69,6 @@ object TimeUsage {
     val first = StructField(columnNames.head, StringType, nullable = false)
     val rest = columnNames.tail.map(StructField(_, DoubleType, nullable = false))
     StructType(first :: rest)
-    /*
-    val fields = columnNames.map(field => StructField(field, DoubleType, nullable = false))
-    StructType(fields)
-    * 
-    */
   }
 
 
@@ -104,32 +99,14 @@ object TimeUsage {
     val workingPre = List("t05", "t1805")
     val otherPre = List("t02", "t04", "t06", "t07", "t08", "t09", "t10", "t12", "t13", "t14", "t15", "t16", "t18")
     columnNames.foldRight[(List[Column], List[Column], List[Column])]((Nil, Nil, Nil)) {
-      (columnName, acc) =>
-        if (primaryPre.exists(columnName.startsWith))
-          acc.copy(_1 = new Column(columnName) :: acc._1)
-        else if (workingPre.exists(columnName.startsWith))
-          acc.copy(_2 = new Column(columnName) :: acc._2)
-        else if (otherPre.exists(columnName.startsWith))
-          acc.copy(_3 = new Column(columnName) :: acc._3)
-        else
-          acc
-    }    
-    /*
-    val primaryCols = columnNames.filter(field => isPre(field, primaryPre)).map(field => new Column(field))
-    val workingCols = columnNames.filter(field => isPre(field, workingPre)).map(field => new Column(field))
-    val otherCols = columnNames.filter(field => isPre(field, otherPre)).map(field => new Column(field))
-
-    (primaryCols, workingCols, otherCols)
-    * 
-    */
-  }
-
-  def isPre(head: String, pres: List[String]): Boolean = {
-    for(str <- pres){
-      if(head.startsWith(str)) return true
+      (col, list) =>
+        if (primaryPre.exists(col.startsWith)) list.copy(_1 = new Column(col) :: list._1)
+        else if (workingPre.exists(col.startsWith)) list.copy(_2 = new Column(col) :: list._2)
+        else if (otherPre.exists(col.startsWith)) list.copy(_3 = new Column(col) :: list._3)
+        else list
     }
-    false
   }
+  
   /** @return a projection of the initial DataFrame such that all columns containing hours spent on primary needs
     *         are summed together in a single column (and same for work and leisure). The "teage" column is also
     *         projected to three values: "young", "active", "elder".
